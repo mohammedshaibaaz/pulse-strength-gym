@@ -29,14 +29,14 @@ router.get('/classes', async (req, res) => {
 
 /**
  * POST /api/book
- * Book a class
+ * Book a class with validation
  */
 router.post('/book', [
-  body('name').trim().notEmpty().withMessage('Name is required'),
-  body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
-  body('phone').trim().notEmpty().withMessage('Phone number is required'),
+  body('name').trim().notEmpty().withMessage('Name is required').isLength({ max: 100 }).withMessage('Name too long'),
+  body('email').isEmail().normalizeEmail().withMessage('Valid email is required').isLength({ max: 255 }).withMessage('Email too long'),
+  body('phone').trim().notEmpty().withMessage('Phone number is required').isLength({ max: 20 }).withMessage('Phone too long'),
   body('class_id').isMongoId().withMessage('Valid class ID is required'),
-  body('emergency_contact').optional().trim()
+  body('emergency_contact').optional().trim().isLength({ max: 100 }).withMessage('Emergency contact too long')
 ], async (req, res) => {
   // Check for validation errors
   const errors = validationResult(req);

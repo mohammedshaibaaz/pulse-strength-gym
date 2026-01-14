@@ -1,15 +1,33 @@
 import nodemailer from 'nodemailer';
 
-// Create reusable transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+// Validate email configuration
+const validateEmailConfig = () => {
+  const requiredEnvVars = ['EMAIL_HOST', 'EMAIL_PORT', 'EMAIL_USER', 'EMAIL_PASSWORD', 'EMAIL_FROM'];
+  const missing = requiredEnvVars.filter(env => !process.env[env]);
+  
+  if (missing.length > 0) {
+    console.warn(`⚠️  Email configuration incomplete. Missing: ${missing.join(', ')}`);
+    return false;
+  }
+  return true;
+};
+
+// Create reusable transporter (only if config is valid)
+let transporter = null;
+
+if (validateEmailConfig()) {
+  transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: parseInt(process.env.EMAIL_PORT),
+    secure: parseInt(process.env.EMAIL_PORT) === 465, // true for 465, false for other ports
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+} else {
+  console.warn('⚠️  Email service disabled - configuration missing');
+}
 
 /**
  * Send booking confirmation email
@@ -18,6 +36,12 @@ const transporter = nodemailer.createTransport({
  * @param {Object} classData - Class details
  */
 export const sendBookingEmail = async (to, userName, classData) => {
+  // Skip if email service is not configured
+  if (!transporter) {
+    console.warn('⚠️  Email service not configured - skipping email');
+    return;
+  }
+
   try {
     const mailOptions = {
       from: process.env.EMAIL_FROM,

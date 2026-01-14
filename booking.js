@@ -300,6 +300,30 @@ bookingForm.addEventListener('submit', async (e) => {
       throw new Error(data.error || 'Booking failed');
     }
     
+    // Send confirmation email via EmailJS
+    try {
+      const emailParams = {
+        to_name: formData.name,
+        to_email: formData.email,
+        class_name: currentBookingClass.name,
+        class_trainer: currentBookingClass.trainer,
+        class_day: currentBookingClass.day,
+        class_time: currentBookingClass.time,
+        class_difficulty: currentBookingClass.difficulty,
+        user_phone: formData.phone,
+      };
+
+      await emailjs.send(
+        'YOUR_SERVICE_ID',      // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID',     // Replace with your EmailJS template ID
+        emailParams
+      );
+      console.log('Confirmation email sent successfully');
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+      // Don't fail the booking if email fails
+    }
+    
     // Track booking with GA4
     if (window.trackBooking) {
       window.trackBooking(currentBookingClass);

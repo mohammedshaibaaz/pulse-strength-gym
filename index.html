@@ -9,12 +9,12 @@
     <title>Pulse Strength Club - Premium Gym & Strength Training in Berlin | Open 24/7</title>
     
     <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XSN09X7J71"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', {
+      gtag('config', 'G-XSN09X7J71', {
         'send_page_view': true
       });
       
@@ -37,6 +37,15 @@
           'transaction_id': Date.now()
         });
       };
+    </script>
+    
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      // Initialize EmailJS with your public key
+      (function(){
+        emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+      })();
     </script>
     
     <!-- Preconnect to external resources for performance -->

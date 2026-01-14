@@ -75,16 +75,16 @@ const modalClose = document.getElementById('modal-close');
 async function fetchClasses() {
   try {
     console.log('Fetching from:', `${API_URL}/classes`);
-    const response = await fetch(`${API_URL}/classes`);
-    console.log('Response status:', response.status);
+    const classesResponse = await fetch(`${API_URL}/classes`);
+    console.log('Response status:', classesResponse.status);
     
-    if (!response.ok) {
-      const errorText = await response.text();
+    if (!classesResponse.ok) {
+      const errorText = await classesResponse.text();
       console.error('API Error:', errorText);
-      throw new Error(`Failed to fetch classes: ${response.status} - ${errorText}`);
+      throw new Error(`Failed to fetch classes: ${classesResponse.status} - ${errorText}`);
     }
     
-    const data = await response.json();
+    const data = await classesResponse.json();
     console.log('Classes data:', data);
     
     if (!data.data || !Array.isArray(data.data)) {
@@ -282,7 +282,7 @@ bookingForm.addEventListener('submit', async (e) => {
   statusEl.style.color = 'var(--text-secondary)';
   
   try {
-    const response = await fetch(`${API_URL}/book`, {
+    const bookingResponse = await fetch(`${API_URL}/book`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -290,9 +290,9 @@ bookingForm.addEventListener('submit', async (e) => {
       body: JSON.stringify(formData)
     });
     
-    const data = await response.json();
+    const data = await bookingResponse.json();
     
-    if (!response.ok) {
+    if (!bookingResponse.ok) {
       // Handle validation errors array from express-validator
       if (data.errors && Array.isArray(data.errors)) {
         throw new Error(data.errors.map(e => e.msg).join(', '));

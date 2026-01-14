@@ -74,10 +74,23 @@ const modalClose = document.getElementById('modal-close');
  */
 async function fetchClasses() {
   try {
+    console.log('Fetching from:', `${API_URL}/classes`);
     const response = await fetch(`${API_URL}/classes`);
-    if (!response.ok) throw new Error('Failed to fetch classes');
+    console.log('Response status:', response.status);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('API Error:', errorText);
+      throw new Error(`Failed to fetch classes: ${response.status} - ${errorText}`);
+    }
     
     const data = await response.json();
+    console.log('Classes data:', data);
+    
+    if (!data.data || !Array.isArray(data.data)) {
+      throw new Error('Invalid response format - no classes array');
+    }
+    
     allClasses = data.data;
     displayClasses(allClasses);
     
@@ -87,6 +100,11 @@ async function fetchClasses() {
     console.error('Error fetching classes:', error);
     scheduleLoading.style.display = 'none';
     scheduleError.style.display = 'block';
+    scheduleError.innerHTML = `
+      <p>⚠️ Unable to load classes</p>
+      <p style="font-size: 0.9em; margin-top: 0.5em;">Error: ${error.message}</p>
+      <p style="font-size: 0.85em; color: #888;">Check console for details</p>
+    `;
   }
 }
 

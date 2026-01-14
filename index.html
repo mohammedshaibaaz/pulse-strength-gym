@@ -612,30 +612,23 @@
         statusEl.style.color = 'var(--text-secondary)';
         
         try {
-          // Send email via EmailJS
-                    // Provide fallback values for booking template placeholders to avoid EmailJS validation errors
+                    // Send email via EmailJS (contact template)
                     const emailParams = {
                         to_name: 'Pulse Team',
-                        to_email: 'mohdshabaaz0009@gmail.com', // explicit recipient
-                        email: 'mohdshabaaz0009@gmail.com',    // matches template {{email}} / To Email field
+                        to_email: 'mohdshabaaz0009@gmail.com', // fixed recipient
+                        email: 'mohdshabaaz0009@gmail.com',    // matches {{email}} / To Email field
                         from_name: formData.name,
                         from_email: formData.email,
                         phone: formData.phone,
                         message: formData.message,
                         goal: formData.interest,
-                        // Fallbacks for template fields (template_e7oh43b expects class_* fields)
-                        class_name: 'Contact Inquiry',
-                        class_trainer: 'N/A',
-                        class_day: 'N/A',
-                        class_time: 'N/A',
-                        class_difficulty: 'N/A'
                     };
 
-          await emailjs.send(
-            'service_0c6x94h',      // EmailJS Service ID
-            'template_e7oh43b',     // EmailJS Template ID
-            emailParams
-          );
+                    await emailjs.send(
+                        'service_0c6x94h',      // EmailJS Service ID
+                        'template_z0nw8jf',     // EmailJS Contact Template ID
+                        emailParams
+                    );
           
           // Show success message
           statusEl.textContent = 'Message sent successfully! We\'ll get back to you soon.';

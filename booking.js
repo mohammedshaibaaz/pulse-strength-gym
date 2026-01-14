@@ -314,8 +314,8 @@ bookingForm.addEventListener('submit', async (e) => {
       };
 
       await emailjs.send(
-        'YOUR_SERVICE_ID',      // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID',     // Replace with your EmailJS template ID
+        'service_0c6x94h',      // EmailJS Service ID
+        'template_e7oh43b',     // EmailJS Template ID
         emailParams
       );
       console.log('Confirmation email sent successfully');

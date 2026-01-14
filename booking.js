@@ -53,7 +53,7 @@
 // API Configuration
 const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.includes('127.0.0.1'))
   ? 'http://localhost:3000/api' 
-  : 'https://your-backend-url.vercel.app/api';
+  : 'https://pulse-strength-gym.vercel.app/api';
 
 // State
 let allClasses = [];
@@ -275,6 +275,10 @@ bookingForm.addEventListener('submit', async (e) => {
     const data = await response.json();
     
     if (!response.ok) {
+      // Handle validation errors array from express-validator
+      if (data.errors && Array.isArray(data.errors)) {
+        throw new Error(data.errors.map(e => e.msg).join(', '));
+      }
       throw new Error(data.error || 'Booking failed');
     }
     

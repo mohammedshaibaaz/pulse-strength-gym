@@ -613,15 +613,22 @@
         
         try {
           // Send email via EmailJS
-          const emailParams = {
-            to_name: 'Pulse Team',
-            to_email: 'mohdshabaaz0009@gmail.com',
-            from_name: formData.name,
-            from_email: formData.email,
-            phone: formData.phone,
-            message: formData.message,
-            goal: formData.interest
-          };
+                    // Provide fallback values for booking template placeholders to avoid EmailJS validation errors
+                    const emailParams = {
+                        to_name: 'Pulse Team',
+                        to_email: 'mohdshabaaz0009@gmail.com',
+                        from_name: formData.name,
+                        from_email: formData.email,
+                        phone: formData.phone,
+                        message: formData.message,
+                        goal: formData.interest,
+                        // Fallbacks for template fields (template_e7oh43b expects class_* fields)
+                        class_name: 'Contact Inquiry',
+                        class_trainer: 'N/A',
+                        class_day: 'N/A',
+                        class_time: 'N/A',
+                        class_difficulty: 'N/A'
+                    };
 
           await emailjs.send(
             'service_0c6x94h',      // EmailJS Service ID
@@ -639,13 +646,13 @@
             submitBtn.disabled = false;
             submitBtn.textContent = 'Send Message';
           }, 3000);
-        } catch (error) {
-          console.error('Email error:', error);
-          statusEl.textContent = 'Failed to send message. Please try again or contact us directly.';
-          statusEl.style.color = 'var(--accent-red)';
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Message';
-        }
+                } catch (error) {
+                    console.error('Email error:', error);
+                    statusEl.textContent = error?.text || 'Failed to send message. Please try again or contact us directly.';
+                    statusEl.style.color = 'var(--accent-red)';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                }
       });
     </script>
 

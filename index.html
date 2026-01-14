@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium gym in Berlin focused on strength training, professional coaching, and real results. Open 24/7 with certified coaches, structured programs, and state-of-the-art equipment. Start your free trial today.">
+    <meta name="keywords" content="premium gym Berlin, strength training Berlin, personal trainer Berlin, gym membership Berlin, fitness club Berlin, 24/7 gym Berlin">
+    <meta name="theme-color" content="#0B0B0B">
+    <title>Pulse Strength Club - Premium Gym & Strength Training in Berlin | Open 24/7</title>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        'send_page_view': true
+      });
+      
+      // Custom event tracking function (used in booking.js)
+      window.trackBooking = function(classData) {
+        gtag('event', 'class_booking', {
+          'event_category': 'Booking',
+          'event_label': classData.name,
+          'value': classData.difficulty,
+          'class_name': classData.name,
+          'trainer': classData.trainer,
+          'day': classData.day
+        });
+        
+        // Track conversion
+        gtag('event', 'conversion', {
+          'send_to': 'G-XXXXXXXXXX/booking_complete',
+          'value': 69.00,
+          'currency': 'EUR',
+          'transaction_id': Date.now()
+        });
+      };
+    </script>
+    
+    <!-- Preconnect to external resources for performance -->
+    <link rel="preconnect" href="https://assets.mixkit.co" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Local Business Schema with enhanced data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "GymAndFitnessCenter",
+        "name": "Pulse Strength Club",
+        "description": "Premium gym focused on strength training, professional coaching, and real results",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Berlin",
+            "addressCountry": "DE"
+        },
+        "openingHours": "Mo-Su 00:00-23:59",
+        "email": "contact@pulsestrength.club",
+        "priceRange": "€39-€99",
+        "areaServed": "Berlin",
+        "url": "https://pulsestrength.club"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Skip to main content for keyboard users -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- Demo Project Popup Modal -->
+    <div id="demo-popup" class="demo-popup" role="dialog" aria-labelledby="demo-popup-title" aria-hidden="true">
+        <div class="demo-popup-overlay" id="demo-popup-overlay"></div>
+        <div class="demo-popup-content">
+            <button type="button" class="demo-popup-close" id="demo-popup-close" aria-label="Close notification">&times;</button>
+            <div class="demo-popup-icon">💼</div>
+            <h3 id="demo-popup-title">Portfolio Demo Project</h3>
+            <p class="demo-popup-description">
+                This is a <strong>full-stack gym booking system</strong> built to showcase professional development skills.
+            </p>
+            <div class="tech-stack-popup">
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">Express</span>
+                <span class="tech-badge">MongoDB</span>
+                <span class="tech-badge">REST API</span>
+                <span class="tech-badge">Nodemailer</span>
+                <span class="tech-badge">GA4</span>
+            </div>
+            <div class="demo-popup-features">
+                <p>✅ Real-time class booking</p>
+                <p>✅ Email notifications</p>
+                <p>✅ Database integration</p>
+            </div>
+            <button type="button" class="btn btn-primary" id="demo-popup-dismiss">Got it, let's explore!</button>
+        </div>
+    </div>
+
+    <header role="banner">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo" aria-label="Pulse Strength Club - Home">
+                    PULSE <span class="logo-accent">STRENGTH</span>
+                </a>
+                <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="menu-icon"></span>
+                </button>
+                <nav role="navigation" aria-label="Main navigation" class="nav-menu">
+                    <ul>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#location">Location</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content wrapper -->
+    <main id="main-content">
+
+    <!-- 1. HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-image" role="img" aria-label="Athlete performing strength training at Pulse Strength Club"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="hero-heading">Strength training built for real results.</h1>
+                <p>Pulse Strength Club is a modern gym in Berlin focused on structured strength training, professional coaching, and long-term progress.</p>
+                <div class="hero-buttons">
+                    <button type="button" class="btn btn-primary" aria-label="Start your 7-day free trial">Start 7-Day Free Trial</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('programs').scrollIntoView({behavior: 'smooth'})" aria-label="View our training programs">View Programs</button>
+                </div>
+                <div class="hero-proof" aria-label="Key proof points">
+                    <div class="hero-proof-item">2,500+ active members</div>
+                    <div class="hero-proof-item">+25% avg strength in 3 months</div>
+                    <div class="hero-proof-item">95% member satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. INTRO -->
+    <section class="intro-section" aria-labelledby="intro-heading">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-divider" aria-hidden="true"></div>
+                <p class="intro-text" id="intro-heading">Designed for individuals who value disciplined training, professional guidance, and a focused environment to push their limits.</p>
+                <div class="intro-divider" aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.5 FOUNDER STORY -->
+    <section class="founder-section" aria-labelledby="founder-heading">
+        <div class="container">
+            <div class="founder-content">
+                <div class="founder-text">
+                    <h2 id="founder-heading">Built by a Strength Coach</h2>
+                    <p>Pulse Strength Club was founded in 2019 by Mohammed Altaf Hussain, a certified strength coach frustrated with the lack of genuine, results-driven gyms in Berlin. After spending over a decade coaching elite athletes and fitness enthusiasts, Mohammed recognized a simple truth: most gyms prioritize quantity over quality.</p>
+                    <p>"I wanted to create a space where discipline matters, where every session is tracked, and where members actually see real progress," Mohammed says. "Not complicated marketing promises—just structured training, professional coaching, and accountability."</p>
+                    <p>Today, Pulse Strength Club stands as Berlin's premier strength training facility, trusted by 2,500+ members who've experienced genuine strength gains and long-term results.</p>
+                </div>
+                <div class="founder-stats">
+                    <div class="founder-stat">
+                        <p class="founder-stat-number">7+</p>
+                        <p class="founder-stat-label">Years Coaching Experience</p>
+                    </div>
+                    <div class="founder-stat">
+                        <p class="founder-stat-number">1000+</p>
+                        <p class="founder-stat-label">Clients Coached</p>
+                    </div>
+                    <div class="founder-stat">
+                        <p class="founder-stat-number">95%</p>
+                        <p class="founder-stat-label">Goal Achievement Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PROGRAMS -->
+    <section class="programs-section" id="programs" aria-labelledby="programs-heading">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="programs-heading">Programs Built for Progress</h2>
+            </div>
+            <div class="programs-grid">
+                <article class="program-card">
+                    <h3>Strength Training</h3>
+                    <p>Progressive programs built around compound lifts, proper technique, and measurable progress. Designed for sustainable strength gains over time.</p>
+                </article>
+                <article class="program-card">
+                    <h3>Personal Coaching</h3>
+                    <p>One-on-one training tailored to individual goals, schedules, and experience levels. Expert guidance for optimal results.</p>
+                </article>
+                <article class="program-card">
+                    <h3>Conditioning & HIIT</h3>
+                    <p>High-intensity sessions designed to improve endurance, stamina, and athletic performance while maintaining strength.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. WHY PULSE -->
+    <section class="why-section" aria-labelledby="why-heading">
+        <div class="container">
+            <div class="why-grid">
+                <div class="why-content">
+                    <h2 id="why-heading">Why Pulse Strength Club</h2>
+                    <ul class="why-list">
+                        <li><strong>Certified professional coaches</strong> — Led by Mohammed Altaf Hussain and team with 7+ years elite coaching experience</li>
+                        <li><strong>Measurable results</strong> — Members average 20-30% strength gains in their first 3 months</li>
+                        <li><strong>Premium equipment</strong> — Power racks, squat stands, 5-140kg dumbbells, competition barbells, and specialized rigs</li>
+                        <li><strong>Small group focus</strong> — Max 8 people per session ensures personal attention and proper form correction</li>
+                        <li><strong>Complete progress tracking</strong> — Every workout logged, analyzed, and adjusted for continuous improvement</li>
+                    </ul>
+                </div>
+                <div class="why-visual" role="img" aria-label="Gym facility interior">
+                    <img src="images/gym-interior.png" alt="Premium gym facility interior with equipment" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. GALLERY -->
+    <section class="gallery-section" aria-labelledby="gallery-heading">
+        <div class="container">
+            <div class="gallery-intro">
+                <h2 id="gallery-heading">Step Inside Pulse Strength Club</h2>
+            </div>
+            
+            <div class="feature-image">
+                <img src="images/training-session.png" alt="Professional training session at Pulse Strength Club" loading="lazy">
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" role="img" aria-label="Premium strength training equipment">
+                    <img src="images/equipment.png" alt="Premium strength training equipment" loading="lazy">
+                </div>
+                <div class="gallery-item" role="img" aria-label="Professional coaching session">
+                    <img src="images/gym-interior2.png" alt="Professional coaching session" loading="lazy">
+                </div>
+                <div class="gallery-item" role="img" aria-label="Modern gym interior">
+                    <img src="images/gym-space.png" alt="Modern gym interior" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5.5 CLASS SCHEDULE & BOOKING -->
+    <section class="schedule-section" id="schedule" aria-labelledby="schedule-heading">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="schedule-heading">Weekly Class Schedule</h2>
+                <p style="text-align: center; color: var(--text-secondary); margin-top: 10px;">Book your spot in our professional-led training sessions</p>
+            </div>
+            
+            <!-- Loading state -->
+            <div id="schedule-loading" class="schedule-loading">
+                <div class="loading-spinner"></div>
+                <p>Loading classes...</p>
+            </div>
+
+            <!-- Error state -->
+            <div id="schedule-error" class="schedule-error" style="display: none;">
+                <p>Failed to load classes. Please refresh the page.</p>
+            </div>
+
+            <!-- Schedule grid -->
+            <div id="schedule-grid" class="schedule-grid" style="display: none;">
+                <!-- Classes will be loaded dynamically via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button type="button" class="modal-close" id="modal-close" aria-label="Close booking form">&times;</button>
+            
+            <h3 id="modal-title">Book Your Class</h3>
+            <div id="modal-class-info" class="modal-class-info"></div>
+
+            <form id="booking-form" class="booking-form" novalidate>
+                <input type="hidden" id="booking-class-id" name="class_id">
+                
+                <div class="form-group">
+                    <label for="booking-name">Full Name <span aria-label="required">*</span></label>
+                    <input type="text" id="booking-name" name="name" required aria-required="true">
+                    <span class="error-message" id="booking-name-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking-email">Email <span aria-label="required">*</span></label>
+                    <input type="email" id="booking-email" name="email" required aria-required="true">
+                    <span class="error-message" id="booking-email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking-phone">Phone Number <span aria-label="required">*</span></label>
+                    <input type="tel" id="booking-phone" name="phone" required aria-required="true">
+                    <span class="error-message" id="booking-phone-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking-emergency">Emergency Contact (Optional)</label>
+                    <input type="tel" id="booking-emergency" name="emergency_contact" placeholder="Name and phone number">
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="booking-submit">Confirm Booking</button>
+                <p class="booking-status" id="booking-status" aria-live="polite"></p>
+            </form>
+
+            <!-- Success message -->
+            <div id="booking-success" class="booking-success" style="display: none;">
+                <div class="success-icon">✓</div>
+                <h4>Booking Confirmed!</h4>
+                <p id="success-message"></p>
+                <button type="button" class="btn btn-secondary" onclick="window.bookingModal.close()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. PROCESS -->
+    <section class="process-section" id="process" aria-labelledby="process-heading">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="process-heading">Your Training Journey</h2>
+            </div>
+            <div class="process-timeline">
+                <article class="process-step">
+                    <div class="step-number" aria-hidden="true">01</div>
+                    <div>
+                        <h3 class="step-title">Assessment</h3>
+                        <p class="step-description">Understanding goals, fitness level, and limitations.</p>
+                    </div>
+                </article>
+                <article class="process-step">
+                    <div class="step-number" aria-hidden="true">02</div>
+                    <div>
+                        <h3 class="step-title">Program Design</h3>
+                        <p class="step-description">Structured plans built for sustainable progress.</p>
+                    </div>
+                </article>
+                <article class="process-step">
+                    <div class="step-number" aria-hidden="true">03</div>
+                    <div>
+                        <h3 class="step-title">Training</h3>
+                        <p class="step-description">Guided sessions focused on form, intensity, and consistency.</p>
+                    </div>
+                </article>
+                <article class="process-step">
+                    <div class="step-number" aria-hidden="true">04</div>
+                    <div>
+                        <h3 class="step-title">Progress Tracking</h3>
+                        <p class="step-description">Continuous adjustments to ensure results.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PRICING -->
+    <section class="pricing-section" id="pricing" aria-labelledby="pricing-heading">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="pricing-heading">Membership Plans</h2>
+            </div>
+            <div class="pricing-toggle">
+                <label class="toggle-label">
+                    <input type="checkbox" id="billing-toggle" aria-label="Toggle annual billing">
+                    <span class="toggle-text">Save 20% with Annual Billing</span>
+                </label>
+            </div>
+            <p class="pricing-guarantee">Cancel anytime. No hidden fees. 7-day free trial included.</p>
+            <div class="pricing-grid">
+                <article class="pricing-card">
+                    <h3>Basic</h3>
+                    <p class="pricing-description">Gym access</p>
+                    <p class="pricing-best-for">Best for self-directed lifters who want 24/7 access.</p>
+                    <div class="pricing-amount" aria-label="39 euros per month">
+                        <span class="price-monthly">€39</span>
+                        <span class="price-annual" style="display:none;">€374</span>
+                    </div>
+                    <p class="pricing-period"><span class="period-monthly">/ month</span><span class="period-annual" style="display:none;">/ year</span></p>
+                    <ul class="pricing-features">
+                        <li>✓ 24/7 gym access</li>
+                        <li>✓ All equipment access</li>
+                        <li>✓ Locker facilities</li>
+                    </ul>
+                    <button type="button" class="btn btn-secondary" aria-label="Get started with Basic membership">Get Started</button>
+                </article>
+                <article class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Pro</h3>
+                    <p class="pricing-description">Gym + group training</p>
+                    <p class="pricing-best-for">Best for lifters who want coaching, classes, and accountability.</p>
+                    <div class="pricing-amount" aria-label="69 euros per month">
+                        <span class="price-monthly">€69</span>
+                        <span class="price-annual" style="display:none;">€662</span>
+                    </div>
+                    <p class="pricing-period"><span class="period-monthly">/ month</span><span class="period-annual" style="display:none;">/ year</span></p>
+                    <ul class="pricing-features">
+                        <li>✓ 24/7 gym access</li>
+                        <li>✓ Group training classes</li>
+                        <li>✓ Progress tracking</li>
+                        <li>✓ Nutrition guidance</li>
+                    </ul>
+                    <button type="button" class="btn btn-primary" aria-label="Get started with Pro membership - Most popular">Get Started</button>
+                </article>
+                <article class="pricing-card">
+                    <h3>Elite</h3>
+                    <p class="pricing-description">Personal coaching included</p>
+                    <p class="pricing-best-for">Best for serious progression with 1:1 coaching and custom programs.</p>
+                    <div class="pricing-amount" aria-label="99 euros per month">
+                        <span class="price-monthly">€99</span>
+                        <span class="price-annual" style="display:none;">€950</span>
+                    </div>
+                    <p class="pricing-period"><span class="period-monthly">/ month</span><span class="period-annual" style="display:none;">/ year</span></p>
+                    <ul class="pricing-features">
+                        <li>✓ 24/7 gym access</li>
+                        <li>✓ Personal coaching sessions</li>
+                        <li>✓ Custom program design</li>
+                        <li>✓ Priority scheduling</li>
+                    </ul>
+                    <button type="button" class="btn btn-secondary" aria-label="Get started with Elite membership">Get Started</button>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. STATS -->
+    <section class="stats-section" aria-labelledby="stats-heading">
+        <div class="container">
+            <h2 id="stats-heading" class="sr-only">Pulse Strength Club Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="2500">0</div>
+                    <p class="stat-label">Active Members</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="95">0</div>
+                    <p class="stat-label">% Member Satisfaction</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="150">0</div>
+                    <p class="stat-label">Training Programs</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="24">0</div>
+                    <p class="stat-label">Hour Access</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. TESTIMONIALS -->
+    <section class="testimonials-section" aria-labelledby="testimonials-heading">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="testimonials-heading">Member Experiences</h2>
+            </div>
+            <div class="testimonials-carousel">
+                <div class="carousel-container">
+                    <article class="testimonial-card active">
+                        <div class="testimonial-avatar">MK</div>
+                        <p class="testimonial-quote">"In 8 months, I increased my squat by 45kg and bench by 32kg. The structured approach and professional coaching made the difference. Finally found a gym that tracks real progress."</p>
+                        <div class="testimonial-author">
+                            <span class="author-name">Michael K.</span>
+                            <span class="author-info">Member · 2 years</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-avatar">SL</div>
+                        <p class="testimonial-quote">"Added 18kg of lean muscle in 10 months while dropping 4% body fat. The nutrition guidance and personalized programming is unmatched. Best investment I've made."</p>
+                        <div class="testimonial-author">
+                            <span class="author-name">Sarah L.</span>
+                            <span class="author-info">Member · 1 year</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="testimonial-avatar">AM</div>
+                        <p class="testimonial-quote">"Deadlift went from 200kg to 260kg in 18 months. The 24/7 access and professional programming finally broke my 3-year plateau. Highly recommend for serious lifters."</p>
+                        <div class="testimonial-author">
+                            <span class="author-name">Andreas M.</span>
+                            <span class="author-info">Member · 3 years</span>
+                        </div>
+                    </article>
+                </div>
+                <div class="carousel-nav">
+                    <button type="button" class="carousel-btn carousel-prev" aria-label="Previous testimonial">←</button>
+                    <button type="button" class="carousel-btn carousel-next" aria-label="Next testimonial">→</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="faq-section" aria-labelledby="faq-heading">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="faq-heading">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-grid">
+                <details class="faq-item">
+                    <summary class="faq-question">Do I need prior gym experience to join?<span class="faq-icon" aria-hidden="true"></span></summary>
+                    <p class="faq-answer">No. Our certified coaches work with members of all levels. We focus on teaching proper form and scaling exercises to your current ability, ensuring safe progression regardless of experience.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">What's the difference between membership tiers?<span class="faq-icon" aria-hidden="true"></span></summary>
+                    <p class="faq-answer">Basic includes 24/7 gym access. Pro adds group classes and nutrition guidance. Elite includes personal coaching with custom program design. Choose based on your coaching needs and schedule.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Can I cancel my membership anytime?<span class="faq-icon" aria-hidden="true"></span></summary>
+                    <p class="faq-answer">Yes. We offer month-to-month membership with no long-term contracts. Cancel anytime through your member portal or contact us directly.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">How do you track progress?<span class="faq-icon" aria-hidden="true"></span></summary>
+                    <p class="faq-answer">Members get access to our tracking app where we log workouts, measure strength gains, and adjust programs based on real performance data and goals.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Is there a free trial?<span class="faq-icon" aria-hidden="true"></span></summary>
+                    <p class="faq-answer">Yes. Start with a 7-day free trial to experience our facility, meet our coaches, and try a training session. No credit card required.</p>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">What equipment do you have?<span class="faq-icon" aria-hidden="true"></span></summary>
+                    <p class="faq-answer">Full selection of power racks, squat stands, benches, dumbbells (5-140kg), barbells, functional training rigs, cable machines, and specialized strength equipment.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. CONTACT FORM -->
+    <section class="contact-section" aria-labelledby="contact-heading">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="contact-heading">Get in Touch</h2>
+            </div>
+            <form class="contact-form" id="contact-form" novalidate>
+                <div class="form-group">
+                    <label for="contact-name">Full Name <span aria-label="required">*</span></label>
+                    <input type="text" id="contact-name" name="name" required aria-required="true">
+                    <span class="error-message" id="name-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email <span aria-label="required">*</span></label>
+                    <input type="email" id="contact-email" name="email" required aria-required="true">
+                    <span class="error-message" id="email-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="contact-phone">Phone (Optional)</label>
+                    <input type="tel" id="contact-phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="contact-message">Message <span aria-label="required">*</span></label>
+                    <textarea id="contact-message" name="message" rows="6" required aria-required="true"></textarea>
+                    <span class="error-message" id="message-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="contact-interest">Goal <span aria-label="required">*</span></label>
+                    <select id="contact-interest" name="interest" required aria-required="true">
+                        <option value="">Select your goal</option>
+                        <option value="free-trial">Free Trial</option>
+                        <option value="build-muscle">Build muscle</option>
+                        <option value="lose-fat">Lose fat</option>
+                        <option value="break-plateau">Break strength plateau</option>
+                        <option value="get-started">Start from scratch</option>
+                        <option value="tour">Schedule a Tour</option>
+                    </select>
+                    <span class="error-message" id="interest-error"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" aria-label="Submit contact form">Send Message</button>
+                <p class="form-status" id="form-status" aria-live="polite" aria-atomic="true"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- 12. LOCATION -->
+    <section class="location-section" id="location" aria-labelledby="location-heading">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="location-heading">Visit Us in Berlin</h2>
+            </div>
+            <div class="location-grid">
+                <div class="location-info">
+                    <h3>Location & Hours</h3>
+                    <div class="info-item">
+                        <p class="info-label">Location</p>
+                        <p class="info-value">Berlin, Germany</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">Hours</p>
+                        <p class="info-value">Open 24/7</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">Contact</p>
+                        <p class="info-value"><a href="mailto:contact@pulsestrength.club">contact@pulsestrength.club</a></p>
+                    </div>
+                    <div class="info-item" style="margin-top: var(--spacing-lg);">
+                        <button type="button" class="btn btn-primary" aria-label="Schedule a facility tour">Schedule a Tour</button>
+                    </div>
+                </div>
+                <div class="location-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155444.4656938615!2d13.23482!3d52.52000659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84e373f035901%3A0x42120465b5e3b70!2sBerlin%2C%20Germany!5e0!3m2!1sen!2sus!4v1736179200000!5m2!1sen!2sus"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Pulse Strength Club Location in Berlin, Germany"
+                        aria-label="Interactive map showing Pulse Strength Club location in Berlin">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. FINAL CTA -->
+    <section class="final-cta-section" aria-labelledby="final-cta-heading">
+        <div class="final-cta-content">
+            <h2 id="final-cta-heading">Start Your Training Journey</h2>
+            <p>No commitment required. 7-day free trial includes full gym access, one coaching consultation, and personalized program assessment.</p>
+            <div class="cta-highlight">Only 3 spots remaining this month in our Pro program</div>
+            <button type="button" class="btn btn-primary" aria-label="Claim your 7-day free trial">Claim Your Free Trial</button>
+        </div>
+    </section>
+
+    </main>
+    <!-- End main content wrapper -->
+
+    <!-- 14. FOOTER -->
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h4>Pulse Strength Club</h4>
+                    <p>Premium gym in Berlin</p>
+                    <p>Berlin, Germany</p>
+                    <p>Open 24/7</p>
+                    <p><a href="mailto:contact@pulsestrength.club">contact@pulsestrength.club</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#location">Location</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Information</h5>
+                    <ul>
+                        <li><a href="#" rel="noopener">Privacy Policy</a></li>
+                        <li><a href="#" rel="noopener">Terms of Service</a></li>
+                        <li><a href="#" rel="noopener">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pulse Strength Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="booking.js"></script>
+
+</body>
+</html>

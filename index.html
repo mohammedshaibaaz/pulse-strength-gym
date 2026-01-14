@@ -616,7 +616,8 @@
                     // Provide fallback values for booking template placeholders to avoid EmailJS validation errors
                     const emailParams = {
                         to_name: 'Pulse Team',
-                        to_email: 'mohdshabaaz0009@gmail.com',
+                        to_email: 'mohdshabaaz0009@gmail.com', // explicit recipient
+                        email: 'mohdshabaaz0009@gmail.com',    // matches template {{email}} / To Email field
                         from_name: formData.name,
                         from_email: formData.email,
                         phone: formData.phone,
